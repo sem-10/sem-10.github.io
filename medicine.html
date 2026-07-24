@@ -227,18 +227,18 @@ const svg = k => `<svg width="21" height="21" viewBox="0 0 24 24" fill="none" st
 const DATA = [
  {name:"Critical Care", tag:"ICU, resuscitation & safe prescribing", color:"#f97316", icon:"crit", lects:[
    [1,"Hypertensive emergency","L"],
-   [2,"ALS & peri-arrest arrhythmia","L"],
+   [2,"ALS and peri-arrest arrhythmia","L"],
    [3,"Cardiac arrest in special circumstances","L"],
    [4,"Post cardiac arrest care","L"],
-   [5,"Transfer of the critically ill patient","L"],
-   [6,"Haemodynamic monitoring","L"],
-   [7,"Nutrition in the ICU","L"],
+   [5,"Transfer of critically ill patient","L"],
+   [6,"Hemodynamic monitoring","L"],
+   [7,"Nutrition in ICU","L"],
    [8,"Sepsis","L"],
    [9,"Shock","L"],
-   [10,"Antibiotics in the ICU","L"],
+   [10,"Antibiotics in ICU","L"],
    [11,"Coma","L"],
    [12,"Anaphylaxis","L"],
-   [13,"Pulmonary oedema","L"],
+   [13,"Pulmonary edema","L"],
    [14,"Basic & advanced airway","L"],
    [15,"Safe prescription in organ failure","L"],
    [16,"Safe prescription in geriatrics","L"],
@@ -250,15 +250,15 @@ const DATA = [
    [22,"Advanced life support","C"]]},
 
  {name:"Rheumatology & Immunology", tag:"Autoimmune & connective tissue disease", color:"#d946ef", icon:"rheum", lects:[
-   [23,"Systemic lupus erythematosus (SLE)","L"],
-   [24,"Antiphospholipid antibody syndrome (APS)","L"],
+   [23,"Systemic lupus erythematosus","L"],
+   [24,"Antiphospholipid antibody syndrome","L"],
    [25,"Vasculitis","L"],
-   [26,"Familial Mediterranean fever (FMF)","L"],
+   [26,"Familial Mediterranean Fever (FMF)","L"],
    [27,"Inflammatory myopathy","L"],
    [28,"Rheumatological emergencies","L"],
    [29,"Metabolic bone diseases","L"],
-   [30,"Behçet disease","L"],
-   [31,"Investigations in rheumatology","L"],
+   [30,"Bechet disease","L"],
+   [31,"Investigation in rheumatology","L"],
    [32,"Systemic sclerosis","L"]]},
 
  {name:"Rheumatology & Rehabilitation", tag:"Arthritis, back pain & physiotherapy", color:"#a21caf", icon:"rehab", lects:[
@@ -267,7 +267,7 @@ const DATA = [
    [35,"Inflammatory low back pain","L"],
    [36,"Gout","L"],
    [37,"Osteoarthritis","L"],
-   [38,"Differential diagnosis of arthritis","L"],
+   [38,"Arthritis D.Dx","L"],
    [39,"Physiotherapy","L"],
    [40,"Anti-rheumatic drugs","L"],
    [41,"Approach to joint pain","L"],
@@ -283,16 +283,16 @@ const DATA = [
    [51,"Physiotherapy sessions","C"]]},
 
  {name:"Haematology & Oncology", tag:"Blood disorders & malignancy", color:"#9f1239", icon:"hema", lects:[
-   [52,"Anaemia 1","L"],
-   [53,"Anaemia 2","L"],
-   [54,"Bleeding disorders 1 — part 1","L"],
-   [55,"Bleeding disorders 1 — part 2","L"],
+   [52,"Anemia 1","L"],
+   [53,"Anemia 2","L"],
+   [54,"Bleeding disorders 1 part 1","L"],
+   [55,"Bleeding disorders 1 part 2","L"],
    [56,"Bleeding disorders 2","L"],
-   [57,"Haematological aspects of systemic disease","L"],
+   [57,"Hematological aspect of systemic dis.","L"],
    [58,"Patient safety in blood transfusion","L"],
    [59,"Multiple myeloma","L"],
-   [60,"Acute leukaemia","L"],
-   [61,"Chronic leukaemia","L"],
+   [60,"Acute leukemia","L"],
+   [61,"Chronic leukemia","L"],
    [62,"Patient safety in chemotherapy","L"],
    [63,"Oncologic emergencies","L"],
    [64,"Cytotoxic drugs","L"],
@@ -319,7 +319,7 @@ const DATA = [
    [83,"Acute chest pain","L"],
    [84,"Bradyarrhythmia","L"],
    [85,"Cardiogenic shock","L"],
-   [86,"Tachyarrhythmia","L"],
+   [86,"Tachyarrythmia","L"],
    [87,"Acute coronary syndrome","L"],
    [88,"Approach to the patient with heart failure","C"],
    [89,"Approach to the patient with palpitation","C"],
@@ -331,28 +331,28 @@ const DATA = [
    [93,"Fulminant liver failure","L"],
    [94,"Acute upper GI bleeding","L"],
    [95,"Approach to upper GI bleeding","L"],
-   [96,"Treatment plan of haematemesis & melaena","L"],
+   [96,"Treatment plan of H & M","L"],
    [97,"Hepatic encephalopathy","L"],
    [98,"History & clinical examination of haematemesis & melaena","C"],
    [99,"Sengstaken–Blakemore tube insertion","C"]]},
 
  {name:"Neurology", tag:"Stroke, seizures & paralysis", color:"#6366f1", icon:"neuro", lects:[
    [100,"Neuromuscular emergencies","L"],
-   [101,"Haemorrhagic stroke","L"],
+   [101,"Hemorrhagic stroke","L"],
    [102,"Spinal cord injury","L"],
    [103,"Red flags of neck pain","L"],
-   [104,"Status epilepticus","L"],
-   [105,"Acute ischaemic stroke","L"],
+   [104,"Status epileptics","L"],
+   [105,"Acute ischemic stroke","L"],
    [106,"Intracranial hypertension","L"],
-   [107,"Acute flaccid paralysis","L"],
+   [107,"Acute Flaccid paralysis","L"],
    [108,"History & examination of acute flaccid paralysis","C"],
    [109,"Radiology","C"]]},
 
  {name:"Nephrology", tag:"Electrolytes, acid–base & RRT", color:"#0ea5e9", icon:"nephro", lects:[
-   [110,"Acid–base disorders","L"],
-   [111,"Sodium disorders & management","L"],
-   [112,"Potassium disorders & management","L"],
-   [113,"Renal replacement therapy in AKI","L"],
+   [110,"Acid base disorders","L"],
+   [111,"Sodium disorders and management","L"],
+   [112,"Potassium disorders and management","L"],
+   [113,"RRT in AKI","L"],
    [114,"Blood gas interpretation","L"],
    [115,"Fluid balance in the hospitalised patient","C"],
    [116,"Management of acute situations during RRT","C"],
@@ -361,19 +361,19 @@ const DATA = [
  {name:"Endocrinology", tag:"Endocrine emergencies", color:"#10b981", icon:"endo", lects:[
    [118,"Diabetic emergencies","L"],
    [119,"Thyroid emergencies","L"],
-   [120,"Myxoedema coma","L"],
+   [120,"Myxdema coma","L"],
    [121,"Addisonian crisis","L"],
    [122,"Thyroid examination","C"]]},
 
  {name:"Chest", tag:"Asthma, PE & ARDS", color:"#06b6d4", icon:"chest", lects:[
-   [123,"Acute dyspnoea","L"],
+   [123,"Acute dyspnea","L"],
    [124,"Pulmonary embolism","L"],
    [125,"Asthma exacerbation","L"],
    [126,"ARDS","L"],
    [127,"Local chest examination","C"]]},
 
  {name:"Toxicology", tag:"Poisoning & overdose", color:"#64748b", icon:"tox", lects:[
-   [128,"Approach to acute toxic exposure (1 & 2)","L"],
+   [128,"Approach to patient with acute toxic exposure 1 & 2","L"],
    [129,"Toxic case discussion","L"],
    [130,"Approach to the patient with acute toxic ingestion","S"],
    [131,"Management of the patient with acute toxic ingestion 1 & 2","K"]]},
@@ -381,7 +381,7 @@ const DATA = [
  {name:"Nuclear Medicine", tag:"Radiotherapy & isotopes", color:"#84cc16", icon:"nuc", lects:[
    [132,"Brachytherapy","L"],
    [133,"Oncologic emergencies","L"],
-   [134,"Basic principles of radiotherapy","L"]]}
+   [134,"Basics principle of radiotherapy","L"]]}
 ];
 const TYPE = {L:"Lecture", S:"Seminar", C:"Clinical", K:"Skill lab"};
 
