@@ -93,12 +93,10 @@ select{cursor:pointer;font-weight:500}
 .t-S{background:rgba(139,92,246,.13);color:#7c3aed}
 .t-C{background:rgba(22,163,74,.13);color:#15803d}
 .t-K{background:rgba(234,88,12,.13);color:#c2410c}
-.t-B{background:rgba(124,58,237,.13);color:#7c3aed}
 html[data-theme="dark"] .t-L{color:#93c5fd}
 html[data-theme="dark"] .t-S{color:#c4b5fd}
 html[data-theme="dark"] .t-C{color:#86efac}
 html[data-theme="dark"] .t-K{color:#fdba74}
-html[data-theme="dark"] .t-B{color:#c4b5fd}
 .badge{display:inline-block;font-size:9.5px;font-weight:700;padding:2px 7px;border-radius:6px;margin-left:7px;text-transform:uppercase;letter-spacing:.5px;vertical-align:middle}
 .b-stale{background:rgba(245,158,11,.15);color:#b45309;border:1px solid rgba(245,158,11,.3)}
 html[data-theme="dark"] .b-stale{color:#fbbf24}
@@ -136,11 +134,11 @@ input[type=checkbox].rv{accent-color:var(--rev)}
       <div class="hero-txt">
         <div class="kicker">Semester 10 · Class of 2026</div>
         <h1>Surgery — Lecture Tracker</h1>
-        <p>Lectures from the official list, with clinical rounds, seminars and the self-study books.<br>
+        <p>Lectures from the official list, with clinical rounds and seminars.<br>
            Tick each item once studied, then again after revision.</p>
         <div class="meta">
           <span class="chip">30 Lectures</span>
-          <span class="chip">4 Reference books</span>
+          <span class="chip">6 Departments</span>
           <span class="chip" id="chipStreak">Progress auto-saved</span>
         </div>
       </div>
@@ -157,9 +155,9 @@ input[type=checkbox].rv{accent-color:var(--rev)}
   </header>
 
   <div class="stats">
-    <div class="stat" style="--c:var(--ok)"><div class="lbl">Studied</div><b id="sDone">0</b><small id="sDoneSub">of 68 items</small></div>
+    <div class="stat" style="--c:var(--ok)"><div class="lbl">Studied</div><b id="sDone">0</b><small id="sDoneSub">of 64 items</small></div>
     <div class="stat" style="--c:var(--rev)"><div class="lbl">Revised</div><b id="sRev">0</b><small>second pass complete</small></div>
-    <div class="stat" style="--c:var(--warn)"><div class="lbl">Remaining</div><b id="sLeft">68</b><small>not yet started</small></div>
+    <div class="stat" style="--c:var(--warn)"><div class="lbl">Remaining</div><b id="sLeft">64</b><small>not yet started</small></div>
     <div class="stat" style="--c:var(--star)"><div class="lbl">Flagged</div><b id="sStar">0</b><small>marked difficult</small></div>
     <div class="stat" style="--c:#b45309"><div class="lbl">Stale</div><b id="sStale">0</b><small>&gt;14 days since study</small></div>
   </div>
@@ -183,7 +181,6 @@ input[type=checkbox].rv{accent-color:var(--rev)}
       <option value="S">Seminars only</option>
       <option value="C">Clinical only</option>
       <option value="K">Skill labs only</option>
-      <option value="B">Books only</option>
     </select>
     <select id="sort">
       <option value="spec">Group by department</option>
@@ -202,7 +199,7 @@ input[type=checkbox].rv{accent-color:var(--rev)}
   <div id="list"></div>
 
   <div class="foot">
-    Lectures &amp; books from <b>Surgery lectures 2026</b> · clinical rounds &amp; seminars from the Semester 10 schedule<br>
+    Lectures from <b>Surgery lectures 2026</b> · clinical rounds &amp; seminars from the Semester 10 schedule<br>
     Progress is stored in this browser only — use <b>Back up</b> regularly and keep the file safe.
   </div>
 </div>
@@ -212,103 +209,95 @@ input[type=checkbox].rv{accent-color:var(--rev)}
 const ICON = {
   ortho:'<circle cx="6.5" cy="17.5" r="2.1"/><circle cx="8.6" cy="15.4" r="2.1"/><circle cx="17.5" cy="6.5" r="2.1"/><circle cx="15.4" cy="8.6" r="2.1"/><path d="M9 15l6-6"/>',
   onco :'<circle cx="8.5" cy="9.5" r="3.5"/><circle cx="15.5" cy="15" r="4"/><path d="M11 12l2 1.5"/>',
-  emerg:'<rect x="3" y="6.5" width="18" height="12" rx="2.4"/><path d="M12 10v5M9.5 12.5h5"/>',
   vasc :'<path d="M6 3v5a4 4 0 004 4h4a4 4 0 014 4v5"/><circle cx="6" cy="3.4" r="1.4"/><circle cx="18" cy="20.6" r="1.4"/>',
   anes :'<rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M6 12h3l1.5-3.5 2.2 6.5 1.6-3H18"/>',
   misc :'<rect x="5" y="4" width="14" height="17" rx="2.2"/><path d="M9.5 3.5h5a1 1 0 011 1V6a1 1 0 01-1 1h-5a1 1 0 01-1-1V4.5a1 1 0 011-1z"/><path d="M8.5 11h7M8.5 15h4.5"/>',
-  plast:'<rect x="2.5" y="8.5" width="19" height="7" rx="3.5" transform="rotate(-40 12 12)"/><circle cx="12" cy="12" r="1"/><path d="M10 10l4 4M14 10l-4 4"/>',
-  book :'<path d="M5 4.5A2.5 2.5 0 017.5 2H20v15H7.5A2.5 2.5 0 005 19.5z"/><path d="M5 19.5A2.5 2.5 0 017.5 17H20v5H7.5A2.5 2.5 0 015 19.5z"/>'
+  plast:'<rect x="2.5" y="8.5" width="19" height="7" rx="3.5" transform="rotate(-40 12 12)"/><circle cx="12" cy="12" r="1"/><path d="M10 10l4 4M14 10l-4 4"/>'
 };
 const svg = k => `<svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${ICON[k]}</svg>`;
 
-/* ===== CURRICULUM — lectures & books from Surgery lectures 2026; clinical/seminars kept from the schedule =====
-   row = [id, title, type(L/S/C/K/B)] */
+/* ===== CURRICULUM — Surgery lectures 2026 (30 lectures); clinical rounds & seminars from the schedule =====
+   row = [id, title, type(L/S/C/K)] */
 const DATA = [
- {name:"Orthopaedics", tag:"Self-study book & clinical examination", color:"#ea580c", icon:"ortho", lects:[
-   [1,"Orthopaedics — Book (Part 1)","B"],
-   [2,"Orthopaedics — Book (Part 2)","B"],
-   [3,"History taking","C"],
-   [4,"X-ray interpretation","C"],
-   [5,"Hip examination","C"],
-   [6,"Shoulder examination","C"],
-   [7,"Knee examination","C"]]},
+ {name:"Orthopaedics", tag:"Clinical examination & radiology", color:"#ea580c", icon:"ortho", lects:[
+   [1,"History taking","C"],
+   [2,"X-ray interpretation","C"],
+   [3,"Hip examination","C"],
+   [4,"Shoulder examination","C"],
+   [5,"Knee examination","C"]]},
 
  {name:"Surgical Oncology", tag:"Surgical oncology & skin tumours", color:"#be123c", icon:"onco", lects:[
-   [8,"Common cancer family syndrome","L"],
-   [9,"Approach (D.Dx) of abdominal swelling","L"],
-   [10,"Lymphadenopathy","L"],
-   [11,"Anatomy of the peritoneum","L"],
-   [12,"Risk factors for upper aerodigestive cancers","L"],
-   [13,"Basal cell carcinoma","L"],
-   [14,"Precancerous skin lesions","L"],
-   [15,"Retroperitoneal sarcoma","L"],
-   [16,"Squamous cell carcinoma","L"],
-   [17,"Aerodigestive cancers workup","L"],
-   [18,"Jaw masses","L"],
-   [19,"Communication with cancer patients","L"],
-   [20,"Mole & melanoma","L"],
-   [21,"Tumours of oral cavity & tongue","L"],
-   [22,"Upper aerodigestive tract cancer","S"],
-   [23,"Cancer epidemiology","S"],
-   [24,"Cancer prevention & screening","S"],
-   [25,"Principles of cancer management","S"],
-   [26,"Soft tissue tumours","S"],
-   [27,"Lymph node examination 1","C"],
-   [28,"Lymph node examination 2","C"],
-   [29,"Skin examination 1","C"],
-   [30,"Skin examination 2","C"],
-   [31,"Oral cavity examination","C"]]},
+   [6,"Common cancer family syndrome","L"],
+   [7,"Approach (D.Dx) of abdominal swelling","L"],
+   [8,"Lymphadenopathy","L"],
+   [9,"Anatomy of the peritoneum","L"],
+   [10,"Risk factors for upper aerodigestive cancers","L"],
+   [11,"Basal cell carcinoma","L"],
+   [12,"Precancerous skin lesions","L"],
+   [13,"Retroperitoneal sarcoma","L"],
+   [14,"Squamous cell carcinoma","L"],
+   [15,"Aerodigestive cancers workup","L"],
+   [16,"Jaw masses","L"],
+   [17,"Communication with cancer patients","L"],
+   [18,"Mole & melanoma","L"],
+   [19,"Tumours of oral cavity & tongue","L"],
+   [20,"Upper aerodigestive tract cancer","S"],
+   [21,"Cancer epidemiology","S"],
+   [22,"Cancer prevention & screening","S"],
+   [23,"Principles of cancer management","S"],
+   [24,"Soft tissue tumours","S"],
+   [25,"Lymph node examination 1","C"],
+   [26,"Lymph node examination 2","C"],
+   [27,"Skin examination 1","C"],
+   [28,"Skin examination 2","C"],
+   [29,"Oral cavity examination","C"]]},
 
- {name:"Emergency & General", tag:"Self-study reference book", color:"#dc2626", icon:"emerg", lects:[
-   [32,"Emergency — Book","B"]]},
-
- {name:"Vascular Surgery", tag:"Self-study book & clinical rounds", color:"#0d9488", icon:"vasc", lects:[
-   [33,"Vascular — Book","B"],
-   [34,"Varicose veins & venous system","C"],
-   [35,"Chronic ischaemia","C"],
-   [36,"Chronic leg ulcer","C"],
-   [37,"Swollen limbs & lymphoedema","C"]]},
+ {name:"Vascular Surgery", tag:"Clinical rounds", color:"#0d9488", icon:"vasc", lects:[
+   [30,"Varicose veins & venous system","C"],
+   [31,"Chronic ischaemia","C"],
+   [32,"Chronic leg ulcer","C"],
+   [33,"Swollen limbs & lymphoedema","C"]]},
 
  {name:"Anaesthesia", tag:"Perioperative care, ICU & pain", color:"#0891b2", icon:"anes", lects:[
-   [38,"Preoperative preparation & assessment","L"],
-   [39,"Regional anaesthesia","L"],
-   [40,"ICU 1 — indications of ICU admission","L"],
-   [41,"ICU 2 — monitoring of patients in ICU","L"],
-   [42,"General anaesthesia","L"],
-   [43,"Postoperative complications of GA","L"],
-   [44,"Pain management","L"],
-   [45,"Acid–base balance","L"],
-   [46,"Approach to airway management","C"],
-   [47,"Life support","K"]]},
+   [34,"Preoperative preparation & assessment","L"],
+   [35,"Regional anaesthesia","L"],
+   [36,"ICU 1 — indications of ICU admission","L"],
+   [37,"ICU 2 — monitoring of patients in ICU","L"],
+   [38,"General anaesthesia","L"],
+   [39,"Postoperative complications of GA","L"],
+   [40,"Pain management","L"],
+   [41,"Acid–base balance","L"],
+   [42,"Approach to airway management","C"],
+   [43,"Life support","K"]]},
 
  {name:"Miscellaneous", tag:"Ethics, quality, audit & acute abdomen", color:"#6366f1", icon:"misc", lects:[
-   [48,"Medical ethics & professional behaviour","L"],
-   [49,"Health care quality & patient safety","L"],
-   [50,"Clinical audit","L"],
-   [51,"Approach to the polytraumatised patient","C"],
-   [52,"Approach to abdominal trauma I","C"],
-   [53,"Approach to abdominal trauma II","C"],
-   [54,"Approach to the acute abdomen","C"],
-   [55,"Acute appendicitis","C"],
-   [56,"Acute cholecystitis","C"],
-   [57,"Acute pancreatitis","C"],
-   [58,"Approach to pneumoperitoneum (perforated viscus)","C"],
-   [59,"Intestinal obstruction","C"],
-   [60,"Approach to complicated hernia","C"],
-   [61,"Trauma team","K"]]},
+   [44,"Medical ethics & professional behaviour","L"],
+   [45,"Health care quality & patient safety","L"],
+   [46,"Clinical audit","L"],
+   [47,"Approach to the polytraumatised patient","C"],
+   [48,"Approach to abdominal trauma I","C"],
+   [49,"Approach to abdominal trauma II","C"],
+   [50,"Approach to the acute abdomen","C"],
+   [51,"Acute appendicitis","C"],
+   [52,"Acute cholecystitis","C"],
+   [53,"Acute pancreatitis","C"],
+   [54,"Approach to pneumoperitoneum (perforated viscus)","C"],
+   [55,"Intestinal obstruction","C"],
+   [56,"Approach to complicated hernia","C"],
+   [57,"Trauma team","K"]]},
 
  {name:"Plastic Surgery", tag:"Burns, grafts & wound healing", color:"#db2777", icon:"plast", lects:[
-   [62,"Burn","L"],
-   [63,"Skin graft & flap","L"],
-   [64,"Hypertrophic scar & keloid","L"],
-   [65,"Pressure sores","L"],
-   [66,"Wound healing","L"],
-   [67,"Burns","C"],
-   [68,"Flaps & pressure sores","C"]]}
+   [58,"Burn","L"],
+   [59,"Skin graft & flap","L"],
+   [60,"Hypertrophic scar & keloid","L"],
+   [61,"Pressure sores","L"],
+   [62,"Wound healing","L"],
+   [63,"Burns","C"],
+   [64,"Flaps & pressure sores","C"]]}
 ];
-const TYPE = {L:"Lecture", S:"Seminar", C:"Clinical", K:"Skill lab", B:"Book"};
+const TYPE = {L:"Lecture", S:"Seminar", C:"Clinical", K:"Skill lab"};
 
-const KEY="surgTrackerV4", TKEY="imTrackerTheme", STALE=14;
+const KEY="surgTrackerV5", TKEY="imTrackerTheme", STALE=14;
 let state = JSON.parse(localStorage.getItem(KEY)||"{}");
 const save = () => localStorage.setItem(KEY, JSON.stringify(state));
 const get  = id => state[id] || {d:0,r:0,s:0,dt:null};
@@ -428,7 +417,7 @@ function resetAll(){
   state = {}; save(); render(); toast("All progress cleared");
 }
 function exportData(){
-  const blob = new Blob([JSON.stringify({v:4, subject:"surgery", saved:new Date().toISOString(), state})], {type:"application/json"});
+  const blob = new Blob([JSON.stringify({v:5, subject:"surgery", saved:new Date().toISOString(), state})], {type:"application/json"});
   const a = document.createElement("a");
   a.href = URL.createObjectURL(blob);
   a.download = "surgery-progress-" + today() + ".json";
