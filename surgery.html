@@ -134,11 +134,11 @@ input[type=checkbox].rv{accent-color:var(--rev)}
       <div class="hero-txt">
         <div class="kicker">Semester 10 · Class of 2026</div>
         <h1>Surgery — Lecture Tracker</h1>
-        <p>Lectures from the official list, with clinical rounds and seminars.<br>
+        <p>The full lecture list, with clinical rounds and seminars.<br>
            Tick each item once studied, then again after revision.</p>
         <div class="meta">
-          <span class="chip">30 Lectures</span>
-          <span class="chip">6 Departments</span>
+          <span class="chip">63 Lectures</span>
+          <span class="chip">7 Departments</span>
           <span class="chip" id="chipStreak">Progress auto-saved</span>
         </div>
       </div>
@@ -155,9 +155,9 @@ input[type=checkbox].rv{accent-color:var(--rev)}
   </header>
 
   <div class="stats">
-    <div class="stat" style="--c:var(--ok)"><div class="lbl">Studied</div><b id="sDone">0</b><small id="sDoneSub">of 64 items</small></div>
+    <div class="stat" style="--c:var(--ok)"><div class="lbl">Studied</div><b id="sDone">0</b><small id="sDoneSub">of 97 items</small></div>
     <div class="stat" style="--c:var(--rev)"><div class="lbl">Revised</div><b id="sRev">0</b><small>second pass complete</small></div>
-    <div class="stat" style="--c:var(--warn)"><div class="lbl">Remaining</div><b id="sLeft">64</b><small>not yet started</small></div>
+    <div class="stat" style="--c:var(--warn)"><div class="lbl">Remaining</div><b id="sLeft">97</b><small>not yet started</small></div>
     <div class="stat" style="--c:var(--star)"><div class="lbl">Flagged</div><b id="sStar">0</b><small>marked difficult</small></div>
     <div class="stat" style="--c:#b45309"><div class="lbl">Stale</div><b id="sStale">0</b><small>&gt;14 days since study</small></div>
   </div>
@@ -199,7 +199,7 @@ input[type=checkbox].rv{accent-color:var(--rev)}
   <div id="list"></div>
 
   <div class="foot">
-    Lectures from <b>Surgery lectures 2026</b> · clinical rounds &amp; seminars from the Semester 10 schedule<br>
+    Lectures from the <b>Sem 10 lecture list</b> · clinical rounds &amp; seminars from the department schedule<br>
     Progress is stored in this browser only — use <b>Back up</b> regularly and keep the file safe.
   </div>
 </div>
@@ -209,6 +209,7 @@ input[type=checkbox].rv{accent-color:var(--rev)}
 const ICON = {
   ortho:'<circle cx="6.5" cy="17.5" r="2.1"/><circle cx="8.6" cy="15.4" r="2.1"/><circle cx="17.5" cy="6.5" r="2.1"/><circle cx="15.4" cy="8.6" r="2.1"/><path d="M9 15l6-6"/>',
   onco :'<circle cx="8.5" cy="9.5" r="3.5"/><circle cx="15.5" cy="15" r="4"/><path d="M11 12l2 1.5"/>',
+  emerg:'<rect x="3" y="6.5" width="18" height="12" rx="2.4"/><path d="M12 10v5M9.5 12.5h5"/>',
   vasc :'<path d="M6 3v5a4 4 0 004 4h4a4 4 0 014 4v5"/><circle cx="6" cy="3.4" r="1.4"/><circle cx="18" cy="20.6" r="1.4"/>',
   anes :'<rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M6 12h3l1.5-3.5 2.2 6.5 1.6-3H18"/>',
   misc :'<rect x="5" y="4" width="14" height="17" rx="2.2"/><path d="M9.5 3.5h5a1 1 0 011 1V6a1 1 0 01-1 1h-5a1 1 0 01-1-1V4.5a1 1 0 011-1z"/><path d="M8.5 11h7M8.5 15h4.5"/>',
@@ -216,88 +217,123 @@ const ICON = {
 };
 const svg = k => `<svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${ICON[k]}</svg>`;
 
-/* ===== CURRICULUM — Surgery lectures 2026 (30 lectures); clinical rounds & seminars from the schedule =====
+/* ===== CURRICULUM — full Sem 10 surgery lecture list; clinical rounds & seminars from the schedule =====
    row = [id, title, type(L/S/C/K)] */
 const DATA = [
- {name:"Orthopaedics", tag:"Clinical examination & radiology", color:"#ea580c", icon:"ortho", lects:[
-   [1,"History taking","C"],
-   [2,"X-ray interpretation","C"],
-   [3,"Hip examination","C"],
-   [4,"Shoulder examination","C"],
-   [5,"Knee examination","C"]]},
+ {name:"Orthopaedics", tag:"Fractures, joints, spine & tumours", color:"#ea580c", icon:"ortho", lects:[
+   [1,"Common upper limb fractures & dislocations","L"],
+   [2,"Principles of management of paediatric fractures","L"],
+   [3,"Developmental dysplasia of the hip (DDH)","L"],
+   [4,"Perthes disease","L"],
+   [5,"Congenital talipes equinovarus (CTEV)","L"],
+   [6,"Deformity","L"],
+   [7,"Arthritis & replacement surgery","L"],
+   [8,"Introduction to musculoskeletal tumours","L"],
+   [9,"Knee injuries","L"],
+   [10,"Foot & ankle injuries","L"],
+   [11,"Spinal injuries & degenerative spine disease","L"],
+   [12,"Scoliosis & kyphosis","L"],
+   [13,"History taking","C"],
+   [14,"X-ray interpretation","C"],
+   [15,"Hip examination","C"],
+   [16,"Shoulder examination","C"],
+   [17,"Knee examination","C"]]},
 
  {name:"Onco-surgery", tag:"Surgical oncology & skin tumours", color:"#be123c", icon:"onco", lects:[
-   [6,"Common cancer family syndrome","L"],
-   [7,"Approach (D.Dx) of abdominal swelling","L"],
-   [8,"Lymphadenopathy","L"],
-   [9,"Anatomy of the peritoneum","L"],
-   [10,"Risk factors for upper aerodigestive cancers","L"],
-   [11,"Basal cell carcinoma","L"],
-   [12,"Precancerous skin lesion","L"],
-   [13,"Retroperitoneal sarcoma","L"],
-   [14,"Squamous cell carcinoma","L"],
-   [15,"Aerodigestive cancers workup","L"],
-   [16,"Jaw masses","L"],
-   [17,"Communication with cancer patients","L"],
-   [18,"Mole & melanoma","L"],
-   [19,"Tumors of oral cavity & tongue","L"],
-   [20,"Upper aerodigestive tract cancer","S"],
-   [21,"Cancer epidemiology","S"],
-   [22,"Cancer prevention & screening","S"],
-   [23,"Principles of cancer management","S"],
-   [24,"Soft tissue tumours","S"],
-   [25,"Lymph node examination 1","C"],
-   [26,"Lymph node examination 2","C"],
-   [27,"Skin examination 1","C"],
-   [28,"Skin examination 2","C"],
-   [29,"Oral cavity examination","C"]]},
+   [18,"Common cancer family syndrome","L"],
+   [19,"Approach (D.Dx) of abdominal swelling","L"],
+   [20,"Lymphadenopathy","L"],
+   [21,"Anatomy of the peritoneum","L"],
+   [22,"Risk factors for upper aerodigestive cancers","L"],
+   [23,"Basal cell carcinoma","L"],
+   [24,"Precancerous skin lesion","L"],
+   [25,"Retroperitoneal sarcoma","L"],
+   [26,"Squamous cell carcinoma","L"],
+   [27,"Aerodigestive cancers workup","L"],
+   [28,"Jaw masses","L"],
+   [29,"Communication with cancer patients","L"],
+   [30,"Mole & melanoma","L"],
+   [31,"Tumors of oral cavity & tongue","L"],
+   [32,"Upper aerodigestive tract cancer","S"],
+   [33,"Cancer epidemiology","S"],
+   [34,"Cancer prevention & screening","S"],
+   [35,"Principles of cancer management","S"],
+   [36,"Soft tissue tumours","S"],
+   [37,"Lymph node examination 1","C"],
+   [38,"Lymph node examination 2","C"],
+   [39,"Skin examination 1","C"],
+   [40,"Skin examination 2","C"],
+   [41,"Oral cavity examination","C"]]},
 
- {name:"Vascular Surgery", tag:"Clinical rounds", color:"#0d9488", icon:"vasc", lects:[
-   [30,"Varicose veins & venous system","C"],
-   [31,"Chronic ischaemia","C"],
-   [32,"Chronic leg ulcer","C"],
-   [33,"Swollen limbs & lymphoedema","C"]]},
+ {name:"Emergency & General", tag:"Acute abdomen, trauma & obstruction", color:"#dc2626", icon:"emerg", lects:[
+   [42,"Abdominal trauma","L"],
+   [43,"Acute appendicitis","L"],
+   [44,"Acute abdominal pain","L"],
+   [45,"Peritonitis & MVO","L"],
+   [46,"Intestinal obstruction (1)","L"],
+   [47,"Intestinal obstruction (2)","L"],
+   [48,"Neonatal intestinal obstruction","L"],
+   [49,"Shock — septic & haemorrhagic","L"],
+   [50,"The acutely injured patient","L"],
+   [51,"Haemostasis & surgical bleeding","L"],
+   [52,"Haemorrhage & blood transfusion","L"]]},
+
+ {name:"Vascular Surgery", tag:"Arterial, venous & lymphatic", color:"#0d9488", icon:"vasc", lects:[
+   [53,"Vascular malformation","L"],
+   [54,"DVT & chronic venous insufficiency","L"],
+   [55,"Varicose veins","L"],
+   [56,"Acute limb ischaemia","L"],
+   [57,"Arterial injuries","L"],
+   [58,"Chronic limb ischaemia","L"],
+   [59,"Arterial aneurysms","L"],
+   [60,"Chronic leg ulcers","L"],
+   [61,"Lymphoedema & swollen limb","L"],
+   [62,"Thoracic outlet syndrome","L"],
+   [63,"Varicose veins & venous system","C"],
+   [64,"Chronic ischaemia","C"],
+   [65,"Chronic leg ulcer","C"],
+   [66,"Swollen limbs & lymphoedema","C"]]},
 
  {name:"Anesthesia", tag:"Perioperative care, ICU & pain", color:"#0891b2", icon:"anes", lects:[
-   [34,"Preoperative preparation and assessment","L"],
-   [35,"Regional anesthesia","L"],
-   [36,"ICU 1: indications of ICU admission","L"],
-   [37,"ICU 2: Monitoring of patients in ICU","L"],
-   [38,"General Anesthesia","L"],
-   [39,"Post operative complications of GA","L"],
-   [40,"Pain management","L"],
-   [41,"Acid base balance","L"],
-   [42,"Approach to airway management","C"],
-   [43,"Life support","K"]]},
+   [67,"Preoperative preparation and assessment","L"],
+   [68,"Regional anesthesia","L"],
+   [69,"ICU 1: indications of ICU admission","L"],
+   [70,"ICU 2: Monitoring of patients in ICU","L"],
+   [71,"General Anesthesia","L"],
+   [72,"Post operative complications of GA","L"],
+   [73,"Pain management","L"],
+   [74,"Acid base balance","L"],
+   [75,"Approach to airway management","C"],
+   [76,"Life support","K"]]},
 
  {name:"Miscellaneous", tag:"Ethics, quality, audit & acute abdomen", color:"#6366f1", icon:"misc", lects:[
-   [44,"Medical ethics and professional behavior","L"],
-   [45,"Health care quality & patient safety","L"],
-   [46,"Clinical audit","L"],
-   [47,"Approach to the polytraumatised patient","C"],
-   [48,"Approach to abdominal trauma I","C"],
-   [49,"Approach to abdominal trauma II","C"],
-   [50,"Approach to the acute abdomen","C"],
-   [51,"Acute appendicitis","C"],
-   [52,"Acute cholecystitis","C"],
-   [53,"Acute pancreatitis","C"],
-   [54,"Approach to pneumoperitoneum (perforated viscus)","C"],
-   [55,"Intestinal obstruction","C"],
-   [56,"Approach to complicated hernia","C"],
-   [57,"Trauma team","K"]]},
+   [77,"Medical ethics and professional behavior","L"],
+   [78,"Health care quality & patient safety","L"],
+   [79,"Clinical audit","L"],
+   [80,"Approach to the polytraumatised patient","C"],
+   [81,"Approach to abdominal trauma I","C"],
+   [82,"Approach to abdominal trauma II","C"],
+   [83,"Approach to the acute abdomen","C"],
+   [84,"Acute appendicitis","C"],
+   [85,"Acute cholecystitis","C"],
+   [86,"Acute pancreatitis","C"],
+   [87,"Approach to pneumoperitoneum (perforated viscus)","C"],
+   [88,"Intestinal obstruction","C"],
+   [89,"Approach to complicated hernia","C"],
+   [90,"Trauma team","K"]]},
 
  {name:"Plastic", tag:"Burns, grafts & wound healing", color:"#db2777", icon:"plast", lects:[
-   [58,"Burn","L"],
-   [59,"Skin graft & flap","L"],
-   [60,"Hypertrophic scar and keloid","L"],
-   [61,"Pressure sores","L"],
-   [62,"Wound healing","L"],
-   [63,"Burns","C"],
-   [64,"Flaps & pressure sores","C"]]}
+   [91,"Burn","L"],
+   [92,"Skin graft & flap","L"],
+   [93,"Hypertrophic scar and keloid","L"],
+   [94,"Pressure sores","L"],
+   [95,"Wound healing","L"],
+   [96,"Burns","C"],
+   [97,"Flaps & pressure sores","C"]]}
 ];
 const TYPE = {L:"Lecture", S:"Seminar", C:"Clinical", K:"Skill lab"};
 
-const KEY="surgTrackerV5", TKEY="imTrackerTheme", STALE=14;
+const KEY="surgTrackerV6", TKEY="imTrackerTheme", STALE=14;
 let state = JSON.parse(localStorage.getItem(KEY)||"{}");
 const save = () => localStorage.setItem(KEY, JSON.stringify(state));
 const get  = id => state[id] || {d:0,r:0,s:0,dt:null};
@@ -417,7 +453,7 @@ function resetAll(){
   state = {}; save(); render(); toast("All progress cleared");
 }
 function exportData(){
-  const blob = new Blob([JSON.stringify({v:5, subject:"surgery", saved:new Date().toISOString(), state})], {type:"application/json"});
+  const blob = new Blob([JSON.stringify({v:6, subject:"surgery", saved:new Date().toISOString(), state})], {type:"application/json"});
   const a = document.createElement("a");
   a.href = URL.createObjectURL(blob);
   a.download = "surgery-progress-" + today() + ".json";
