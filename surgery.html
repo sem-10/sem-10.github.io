@@ -137,7 +137,7 @@ input[type=checkbox].rv{accent-color:var(--rev)}
         <p>The full lecture list, with clinical rounds and seminars.<br>
            Tick each item once studied, then again after revision.</p>
         <div class="meta">
-          <span class="chip">63 Lectures</span>
+          <span class="chip">64 Lectures</span>
           <span class="chip">7 Departments</span>
           <span class="chip" id="chipStreak">Progress auto-saved</span>
         </div>
@@ -155,9 +155,9 @@ input[type=checkbox].rv{accent-color:var(--rev)}
   </header>
 
   <div class="stats">
-    <div class="stat" style="--c:var(--ok)"><div class="lbl">Studied</div><b id="sDone">0</b><small id="sDoneSub">of 97 items</small></div>
+    <div class="stat" style="--c:var(--ok)"><div class="lbl">Studied</div><b id="sDone">0</b><small id="sDoneSub">of 98 items</small></div>
     <div class="stat" style="--c:var(--rev)"><div class="lbl">Revised</div><b id="sRev">0</b><small>second pass complete</small></div>
-    <div class="stat" style="--c:var(--warn)"><div class="lbl">Remaining</div><b id="sLeft">97</b><small>not yet started</small></div>
+    <div class="stat" style="--c:var(--warn)"><div class="lbl">Remaining</div><b id="sLeft">98</b><small>not yet started</small></div>
     <div class="stat" style="--c:var(--star)"><div class="lbl">Flagged</div><b id="sStar">0</b><small>marked difficult</small></div>
     <div class="stat" style="--c:#b45309"><div class="lbl">Stale</div><b id="sStale">0</b><small>&gt;14 days since study</small></div>
   </div>
@@ -254,6 +254,7 @@ const DATA = [
    [29,"Communication with cancer patients","L"],
    [30,"Mole & melanoma","L"],
    [31,"Tumors of oral cavity & tongue","L"],
+   [98,"Principles of psycho-oncology","L"],
    [32,"Upper aerodigestive tract cancer","S"],
    [33,"Cancer epidemiology","S"],
    [34,"Cancer prevention & screening","S"],
@@ -332,8 +333,9 @@ const DATA = [
    [97,"Flaps & pressure sores","C"]]}
 ];
 const TYPE = {L:"Lecture", S:"Seminar", C:"Clinical", K:"Skill lab"};
+const SEQ = {}; DATA.forEach(s => s.lects.forEach(l => { SEQ[l[0]] = Object.keys(SEQ).length + 1; }));
 
-const KEY="surgTrackerV6", TKEY="imTrackerTheme", STALE=14;
+const KEY="surgTrackerV7", TKEY="imTrackerTheme", STALE=14;
 let state = JSON.parse(localStorage.getItem(KEY)||"{}");
 const save = () => localStorage.setItem(KEY, JSON.stringify(state));
 const get  = id => state[id] || {d:0,r:0,s:0,dt:null};
@@ -369,7 +371,7 @@ function render(){
     const [id,name,ty] = l, o = get(id), age = daysAgo(o.dt);
     const stale = o.d && !o.r && age!==null && age>STALE;
     return `<div class="row ${o.d?'done':''}">
-      <div class="num">${id}</div>
+      <div class="num">${SEQ[id]||id}</div>
       <div class="name"><span class="t">${name}</span>${stale?`<span class="badge b-stale">${age}d stale</span>`:''}</div>
       <div class="type t-${ty}">${TYPE[ty]}</div>
       <div class="date">${o.dt ? (age===0?'today':age+'d ago') : '—'}</div>
